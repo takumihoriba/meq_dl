@@ -10,7 +10,7 @@ from termcolor import cprint
 from tqdm import tqdm
 
 from src.datasets import ThingsMEGDataset
-from src.models import BasicConvClassifier
+from src.models import BasicConvClassifier, WaveNet
 from src.utils import set_seed
 
 
@@ -42,6 +42,11 @@ def run(args: DictConfig):
     model = BasicConvClassifier(
         train_set.num_classes, train_set.seq_len, train_set.num_channels
     ).to(args.device)
+
+    # model = WaveNet(
+    #     num_blocks=3, num_layers=10, in_channels=1, out_channels=32, skip_channels=64, num_classes=train_set.num_classes
+    # ).to(args.device)
+    # loss_fn = nn.CrossEntropyLoss()
 
     # ------------------
     #     Optimizer
