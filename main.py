@@ -2,6 +2,7 @@ import torch
 import hydra
 from omegaconf import DictConfig
 from torch.utils.data import DataLoader
+from torch.optim.lr_scheduler import OneCycleLR
 import random
 import numpy as np
 from src.models.evflownet import EVFlowNet
@@ -44,7 +45,7 @@ def save_optical_flow_to_npy(flow: torch.Tensor, file_name: str):
     '''
     np.save(f"{file_name}.npy", flow.cpu().numpy())
 
-@hydra.main(version_base=None, config_path="configs", config_name="base")
+@hydra.main(version_base=None, config_path="/content/drive/MyDrive/dl_lecture_competition/configs", config_name="base")
 def main(args: DictConfig):
     set_seed(args.seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
